@@ -1,7 +1,7 @@
 # **Finding Lane Lines on the Road** 
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-Refer to [writeup](https://github.com/lokesh1210/SDCND/CarND-LaneLines-P1/WRITEUP.md) for implementation details
+Refer to [writeup](https://github.com/lokesh1210/SDCND/blob/master/CarND-LaneLines-P1/WRITEUP.md) for implementation details
 
 Overview
 ---
