@@ -11,7 +11,7 @@ The goals of this project are
 * Tune the parameters and overlay lane markings overlay on image
 * Extend the functionality on videos
 * use the temporal information in videos to make the algorithm more robust
-* write up on the method of implementation (Posted on [Medium](https://review.udacity.com/#!/rubrics/322/view) )
+* write up on the method of implementation (Posted on [Medium](https://medium.com/@korapati.lokesh/lane-lines-detection-86e4248d564f) )
 
 ---
 ### **1.Find Lane Lines on a image**
