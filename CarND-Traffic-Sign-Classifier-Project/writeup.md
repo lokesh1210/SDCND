@@ -68,25 +68,31 @@ Here is an exploratory visualization of the data set. It is a bar chart showing 
 
 ####1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
-As a first step, I decided to convert the images to grayscale because and updated the local histogram using the Open cv library...
+As a first step, I decided to convert the images to grayscale because and updated the local histogram using the Open cv library
 
 Here is an example of a traffic sign image before and after preprocessing.
 
 ![alt text][image2]
 
-As a last step, I normalized the image data because...
+As a last step, I normalized the image data because normalization helps to retain the data and weights within the activation nonlinearities, else the convolutions accumulate  to a huge number and squashed with little variation with change in weights which makes it hard to train.
 
 also along with the preprocessing data i have normalized the RGB data to give as input to the network and let the network decide on color space conversion.
 
-To add more data to the the data set, I used the following techniques because ... 
-1. Translate
-2. Scale
-3. Warp
-4. Brightness
+**Justification to choosing the RGB normalized Data**
+I have choosen to use the color data with out the local histogram as a study of  how the network performs with choosing its own color space. the traffic signs are identfied using the colors in real world by humans and wanted to see if network has better advantage with color information as well. Initially i decided to use HSV color space then changed to 1x1 convolution with out activations. 
+
+To add more data to the the data set, I used the following techniques because these techiques reflects the variations that occurs in real world situations. the data set may not include data for all variations for each image. 
+1. Translate (shifts the data with in the image )
+2. Scale (makes the network train for size invariant )
+3. Warp (Prespective changes of camera)
+4. Brightness (Lighting changes)
 
 Here is an example of an original image and an augmented image:
 
 ![alt text][image3]
+
+**Justification for not using the augmented data**
+i wanted to see how the network performs on the existing data alone without augmenting with generated data. this also allows me to see how the network performs on new images with jittering data when not trained with that variations
 
 
 
@@ -132,21 +138,31 @@ My final model results were:
 * test set accuracy of  94.70
 
 If an iterative approach was chosen:
+
 * What was the first architecture that was tried and why was it chosen?
-* I have choosen LeNet architecture and accuracies were about 90%
+**I have choosen LeNet architecture and accuracies were about 90%**
 * What were some problems with the initial architecture?
-* with the initial architecture the normalization was not double precision and accuracies are stuck at 60% maximum. after fixing the normalization process the accuracies improved to 85% and saturated about 90% with increased epochs. 
+**with the initial architecture the normalization was not double precision and accuracies are stuck at 60% maximum. after fixing the normalization process the accuracies improved to 85% and saturated about 90% with increased epochs.** 
 * How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* I have added additional layers as per the sermanet article and dropout layers as per navtosha the accuracy improved on validation set to 97% however a stable number is settled around 95.8%
+**I have added additional layers as per the sermanet article and dropout layers as per navtosha the accuracy improved on validation set to 97% however a stable number is settled around 95.8% **
 * Which parameters were tuned? How were they adjusted and why?
-* The tuning parameters include the number of layers, epochs, learning rate.and dropout
+1.The tuning parameters include the number of layers, epochs, learning rate.and dropout
 *      number of layers were added one layer after other to improve the taining accuracy untill the accuracy reached the maximum value
 *      epochs. initially tried with low epochs of up to 10. however the the learning rate was higher and not  settled well to good accuracies
 *      learning rate: learning rate and epochs are tuned together
 *      dropout: i used a decreaing keep prob drop out layers as the layers deepen so that the basic features in first few layers detected and regularied in the  deeper layers
-*      
+
+**Final tuning parameters**
+I have decided to use the following hyper parameters for training 
+
+* batch size :256  (chosen 256 as higher the number the better gradient calculation.)
+* Learning Rate:0.0005 (lower learning rate had less deviations in validation accuracy)
+* epochs : 60 (most of my training converged around 40-50 epocs and a bit of additional epochs to settle )
+* Dropout: 0.9, 0.8, 07, 0.5 (used these drop outs as layers deepens so that the classifying is not over fit and the low level features are segmented well)
+
+
 * What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
-* The convolution layer uses the spatial convolutions to classify compared to a simple flatten networks. the dropout layers helps the network to no overfit and  on the training data 
+ **The convolution layer uses the spatial convolutions to classify compared to a simple flatten networks. the dropout layers helps the network to no overfit and  on the training data** 
 
 If a well known architecture was chosen:
 * What architecture was chosen? Sermanet and LeCun article with additional layers
